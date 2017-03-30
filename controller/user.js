@@ -41,5 +41,9 @@ module.exports = {
         }
       })
     })
+  },
+
+  test: (request, response) => {
+    response.send({ test: true })
   }
 }
