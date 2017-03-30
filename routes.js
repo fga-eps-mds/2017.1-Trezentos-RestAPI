@@ -18,4 +18,5 @@ module.exports = (app, express) => {
   app.use('/api', insecureRouter)
   insecureRouter.post('/user/register', user.register)
   insecureRouter.post('/user/login', user.authenticate)
+  insecureRouter.get('/user/test', user.test)
 }
