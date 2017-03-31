@@ -1,12 +1,7 @@
 module.exports = (env) => {
   var mongoose = require('mongoose')
 
-  var databaseUri = 'mongodb://heroku_z9l4c0x1:gan4pt3hnlr6kblgjg7l3qn7o8@ds135700.mlab.com:35700/heroku_z9l4c0x1'
-  
-  // env.MONGODB_URI || 'mongodb://'
-  //   + env.database.host + ':'
-  //   + env.database.port + '/'
-  //   + env.database.name
+ var databaseUri = env.MONGODB_URI
 
   mongoose.connect(databaseUri, function (err, res) {
     if (err) {
