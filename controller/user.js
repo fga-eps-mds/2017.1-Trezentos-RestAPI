@@ -44,6 +44,6 @@ module.exports = {
   },
 
   test: (request, response) => {
-    response.send({ test: true })
+    response.send({ test: true, production: true })
   }
 }

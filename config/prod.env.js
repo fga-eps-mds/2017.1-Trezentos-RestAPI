@@ -1,7 +1,7 @@
 module.exports = {
-  NODE_ENV: '"development"',
+  NODE_ENV: '"production"',
   host: 'localhost',
-  port: '3000',
+  port: process.env.PORT || 3000,
   database: {
     host: 'localhost',
     port: '27017',

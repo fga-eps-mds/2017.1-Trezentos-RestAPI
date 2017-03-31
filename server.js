@@ -8,10 +8,8 @@ require('./routes')(app, express)
 
 app.use(bodyParser.json({limit: '5mb'}));
 
-var port = process.env.PORT || 3000
+var port = env.port
 
-app.listen(port)
-
-//app.listen(port, () => {
-//  console.log('Listening on ' + port)
-//})
+app.listen(port, () => {
+  console.log('Listening on ' + port)
+})
