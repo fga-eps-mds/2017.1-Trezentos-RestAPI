@@ -4,7 +4,8 @@ module.exports = {
 
   register: (request, response) => {
     return new Promise((resolve, reject) => {
-      var user = request.user
+      var user = new User ({})
+      Object.assign(user, request.body.user)
       user.save((err, user) => {
         if (!err) {
           response.status(200).send({code: '200', message: 'user sucessfully registered'})
@@ -23,8 +24,8 @@ module.exports = {
 
   authenticate: (request, response) => {
     return new Promise((resolve, reject) => {
-      var user = request.user
-      user.findOne({
+      var user = request.body.user
+      User.findOne({
         email: user.email,
         password: user.password
       }, {__v: 0, _id: 0, password: 0}, (err, user) => {
@@ -49,10 +50,15 @@ module.exports = {
 
   registerTest: (request, response) => {
     return new Promise((resolve, reject) => {
-      var user = { email: "test@test.com", age: 20 }
-      User.save((err, user) => {
+      var user =  new User({
+        email: "test@test.com",
+        age: 20,
+        atributo: "13123e1231",
+        oioi: true
+      })
+      user.save((err, user) => {
         if (!err) {
-          response.status(200).send({code: '200', message: 'user sucessfully registered', user: user})
+          response.status(200).send({code: '200', message: 'user sucessfully registered', user: user, age: user.age })
           resolve(true)
         } else {
           if (err.code === 11000) {
