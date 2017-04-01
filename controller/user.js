@@ -45,5 +45,25 @@ module.exports = {
 
   test: (request, response) => {
     response.send({ test: true, production: true })
-  }
+  },
+
+  registerTest: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var user = { email: "test@test.com", age: 20 }
+      User.save((err, user) => {
+        if (!err) {
+          response.status(200).send({code: '200', message: 'user sucessfully registered', user: user})
+          resolve(true)
+        } else {
+          if (err.code === 11000) {
+            reponse.status(200).send({code: err.code, message: 'user already exists'})
+            resolve(err)
+          } else {
+            reject(err)
+          }
+        }
+      })
+    })
+  },
+
 }
