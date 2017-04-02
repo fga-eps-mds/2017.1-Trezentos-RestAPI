@@ -4,8 +4,11 @@ module.exports = {
 
   register: (request, response) => {
     return new Promise((resolve, reject) => {
-      var user = new User ({})
-      Object.assign(user, request.body.user)
+      var user = new User({
+        name: request.body.name,
+        email: request.body.email,
+        password: request.body.password
+      })
       user.save((err, user) => {
         if (!err) {
           response.status(200).send({code: '200', message: 'user sucessfully registered'})
@@ -51,10 +54,9 @@ module.exports = {
   registerTest: (request, response) => {
     return new Promise((resolve, reject) => {
       var user =  new User({
+        name: "test",
         email: "test@test.com",
-        age: 20,
-        atributo: "13123e1231",
-        oioi: true
+        password: "123456"
       })
       user.save((err, user) => {
         if (!err) {

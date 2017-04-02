@@ -3,7 +3,8 @@ var Schema = mongoose.Schema
 
 var userSchema = new Schema ({
   name: String,
-  email: { type: String, required: true, unique: false }
+  email: { type: String, required: true, unique: false },
+  password: { type: String, required: true }
 })
 
 module.exports = mongoose.model('User', userSchema)
