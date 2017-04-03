@@ -4,20 +4,23 @@ module.exports = {
 
   register: (request, response) => {
     return new Promise((resolve, reject) => {
+      console.log(request)
       var user = new User({
-        name: request.body.name,
-        email: request.body.email,
-        password: request.body.password
+        name: request.query.name,
+        email: request.query.email,
+        password: request.query.password
       })
       user.save((err, user) => {
         if (!err) {
           response.status(200).send({code: '200', message: 'user sucessfully registered'})
+          console.log("saved user: ", user)
           resolve(true)
         } else {
           if (err.code === 11000) {
             reponse.status(200).send({code: err.code, message: 'user already exists'})
             resolve(err)
           } else {
+            console.log("error saving user: ", err.message)
             reject(err)
           }
         }
@@ -27,7 +30,7 @@ module.exports = {
 
   authenticate: (request, response) => {
     return new Promise((resolve, reject) => {
-      var user = request.body.user
+      var user = request.user
       User.findOne({
         email: user.email,
         password: user.password
