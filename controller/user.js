@@ -4,7 +4,6 @@ module.exports = {
 
   register: (request, response) => {
     return new Promise((resolve, reject) => {
-      console.log(request)
       var user = new User({
         name: request.query.name,
         email: request.query.email,
@@ -17,10 +16,11 @@ module.exports = {
           resolve(true)
         } else {
           if (err.code === 11000) {
-            reponse.status(200).send({code: err.code, message: 'user already exists'})
+            console.log('error saving user: duplicated user')
+            response.status(200).send({code: err.code, message: 'user already exists'})
             resolve(err)
           } else {
-            console.log("error saving user: ", err.message)
+            console.log('error saving user: ', err.message)
             reject(err)
           }
         }
