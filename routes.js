@@ -26,4 +26,5 @@ module.exports = (app, express) => {
 
   //class
   insecureRouter.post('/class/register', userClass.register)  
+  insecureRouter.get('/class/user/find', userClass.findClassesFromUser)  
 }

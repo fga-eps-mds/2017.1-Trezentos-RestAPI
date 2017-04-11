@@ -6,6 +6,10 @@ module.exports = {
       var userClass = new Class({
         name: request.query.name || request.body.name,
         ownerEmail: request.query.ownerEmail || request.body.ownerEmail,
+        // identifier: {
+        //   name: request.query.name || request.body.name,
+        //   ownerEmail: request.query.ownerEmail || request.body.ownerEmail
+        // },
         institution: request.query.institution || request.body.institution,
         passingScore: request.query.passingScore || request.body.passingScore,
         additionScore: request.query.additionScore || request.body.additionScore,
@@ -29,6 +33,25 @@ module.exports = {
           }
         }
       })
+    })
+  },
+
+  findClassesFromUser: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var email = request.query.email || request.body.email
+      console.log(email)
+
+      Class.find({ ownerEmail: email },
+        { _id: 0, __v: 0 },
+        (err, results) => {
+          if(!err) {
+            response.status(200).send(results)
+            resolve(response)
+          } else {
+            console.log(err)
+            reject(err)
+          }
+        })
     })
   }
 }
