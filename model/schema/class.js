@@ -2,7 +2,8 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var classSchema = new Schema({
-  name: String,
+  name: { type: String, unique: true },
+  ownerEmail: { type: String, unique: true },
   institution: String,
   passingScore: Number,
   additionScore: Number,
