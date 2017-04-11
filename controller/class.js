@@ -4,18 +4,18 @@ module.exports = {
   register: (request, response) => {
     return new Promise((resolve, reject) => {
       var userClass = new Class({
-        name: request.query.name || request.body.name,
-        ownerEmail: request.query.ownerEmail || request.body.ownerEmail,
+        name: request.query.name || request.name,
+        ownerEmail: request.query.ownerEmail || request.ownerEmail,
         // identifier: {
         //   name: request.query.name || request.body.name,
         //   ownerEmail: request.query.ownerEmail || request.body.ownerEmail
         // },
-        institution: request.query.institution || request.body.institution,
-        passingScore: request.query.passingScore || request.body.passingScore,
-        additionScore: request.query.additionScore || request.body.additionScore,
-        password: request.query.password || request.body.password,
-        students: request.query.students || request.body.password,
-        numberOfStudentsPerGroup: request.query.numberOfStudentsPerGroup || request.body.numberOfStudentsPerGroup
+        institution: request.query.institution || request.institution,
+        passingScore: request.query.passingScore || request.passingScore,
+        additionScore: request.query.additionScore || request.additionScore,
+        password: request.query.password || request.password,
+        students: request.query.students || request.password,
+        numberOfStudentsPerGroup: request.query.numberOfStudentsPerGroup || request.numberOfStudentsPerGroup
       })
       userClass.save((err, user) => {
         if (!err) {
@@ -38,7 +38,7 @@ module.exports = {
 
   findClassesFromUser: (request, response) => {
     return new Promise((resolve, reject) => {
-      var email = request.query.email || request.body.email
+      var email = request.query.email || request.email
       console.log(email)
 
       Class.find({ ownerEmail: email },
