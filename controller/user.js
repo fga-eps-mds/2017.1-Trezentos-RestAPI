@@ -31,6 +31,7 @@ module.exports = {
   authenticate: (request, response) => {
     return new Promise((resolve, reject) => {
       var user = request.query.user || request.user
+      console.log(request.query, request.body, request.user)
       User.findOne({
         email: user.email,
         password: user.password
