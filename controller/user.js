@@ -30,7 +30,10 @@ module.exports = {
 
   authenticate: (request, response) => {
     return new Promise((resolve, reject) => {
-      var user = request.query.user || request.user
+      var user = new User({
+        email: request.query.email || request.email,
+        password: request.query.password || request.password
+      })
       console.log(request.query, request.body, request.user)
       User.findOne({
         email: user.email,
