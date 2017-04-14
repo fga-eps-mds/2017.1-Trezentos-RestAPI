@@ -5,9 +5,10 @@ module.exports = {
   register: (request, response) => {
     return new Promise((resolve, reject) => {
       var user = new User({
-        name: request.query.name,
-        email: request.query.email,
-        password: request.query.password
+        name: request.query.name || request.name,
+        email: request.query.email || request.email,
+        password: request.query.password || request.password,
+        isFromFacebook: request.query.facebook || request.facebook
       })
       user.save((err, user) => {
         if (!err) {
@@ -40,7 +41,7 @@ module.exports = {
         password: user.password
       }, {__v: 0, _id: 0, password: 0}, (err, user) => {
         var result = {
-          sucess: err === null && user !== null,
+          success: err === null && user !== null,
           user: user
         }
 
