@@ -8,7 +8,8 @@ module.exports = {
         name: request.query.name || request.name,
         email: request.query.email || request.email,
         password: request.query.password || request.password,
-        isFromFacebook: request.query.facebook || request.facebook
+        isFromFacebook: request.query.facebook || request.facebook,
+        salt: request.query.salt || request.salt
       })
       user.save((err, user) => {
         if (!err) {
@@ -31,18 +32,16 @@ module.exports = {
 
   authenticate: (request, response) => {
     return new Promise((resolve, reject) => {
-      var user = new User({
-        email: request.query.email || request.email,
-        password: request.query.password || request.password
-      })
+      var email = request.query.email || request.email
       console.log(request.query, request.body, request.user)
       User.findOne({
-        email: user.email,
-        password: user.password
-      }, {__v: 0, _id: 0, password: 0}, (err, user) => {
+        email: email,
+      }, {__v: 0, _id: 0}, (err, user) => {
         var result = {
           success: err === null && user !== null,
-          user: user
+          name: user.name,
+          password: user.password,
+          salt: user.salt
         }
 
         response.status(200).send(result)

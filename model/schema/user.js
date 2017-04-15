@@ -5,7 +5,8 @@ var userSchema = new Schema ({
   name: String,
   email: { type: String, required: true, unique: true },
   password: { type: String },
-  isFromFacebook: { type: Boolean, default: false }
+  isFromFacebook: { type: Boolean, default: false },
+  salt: String
 })
 
 module.exports = mongoose.model('User', userSchema)
