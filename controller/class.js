@@ -6,10 +6,6 @@ module.exports = {
       var userClass = new Class({
         name: request.query.name || request.name,
         ownerEmail: request.query.ownerEmail || request.ownerEmail,
-        // identifier: {
-        //   name: request.query.name || request.body.name,
-        //   ownerEmail: request.query.ownerEmail || request.body.ownerEmail
-        // },
         institution: request.query.institution || request.institution,
         passingScore: request.query.passingScore || request.passingScore,
         additionScore: request.query.additionScore || request.additionScore,

@@ -1,15 +1,15 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
-var examSchema = {
+var examSchema = new Schema({
   name: String,
   userClassName: String,
   classOwnerEmail: String,
   firstGrades: Array,
   secondGrades: Array
-}
+})
 
-exameSchema.index({
+examSchema.index({
   name: 1,
   userClassName: 1,
   classOwnerEmail: 1
