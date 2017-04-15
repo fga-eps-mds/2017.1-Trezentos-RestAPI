@@ -5,8 +5,8 @@ var examSchema = {
   name: String,
   userClassName: String,
   classOwnerEmail: String,
-  firstGrades: Number,
-  secondGrades: Number
+  firstGrades: Array,
+  secondGrades: Array
 }
 
 exameSchema.index({
