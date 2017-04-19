@@ -49,5 +49,26 @@ module.exports = {
           }
         })
     })
-  }
+  },
+
+  update: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var userClassJson = request.query.userClass
+
+      var userClass = JSON.parse(userClassJson)
+
+      var oldName = request.query.oldName || request.oldName
+      var ownerEmail = request.query.email || request.email
+      Class.update({ ownerEmail: ownerEmail, name: oldName },
+        {$set: userClass}, (err, mongoResponse) => {
+        if (!err) {
+          var status = err == null && mongoResponse.nModified === 1
+          response.status(200).send({ result: status })
+          resolve(status)
+        } else {
+          reject(err)
+        }
+      })
+    })
+  },
 }
