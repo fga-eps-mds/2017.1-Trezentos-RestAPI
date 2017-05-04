@@ -4,6 +4,7 @@ module.exports = {
 
   register: (request, response) => {
     return new Promise((resolve, reject) => {
+      console.log(response.query)
       var user = new User({
         name: request.query.name || request.body.name,
         email: request.query.email || request.body.email,

@@ -22,7 +22,7 @@ describe('Test suite for Users', () => {
           name: 'test',
           email: 'test@test.com',
           password: '123456',
-          isFromFacebook: false,
+          facebook: false,
           salt: '123'
         }
 
