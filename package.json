@@ -4,15 +4,19 @@
   "description": "Trezentos api rest",
   "main": "server.js",
   "scripts": {
-    "test": "npm test"
+    "test": "NODE_ENV=testing ./node_modules/.bin/mocha --timeout 10000 --reporter spec"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.16.1",
+    "chai": "^3.5.0",
     "express": "^4.14.1",
     "express-jwt": "^5.1.0",
+    "mocha": "^3.3.0",
+    "mongo-seed": "^0.6.0",
     "mongoose": "^4.8.4",
+    "sinon": "^2.2.0",
     "webpack-merge": "^3.0.0"
   }
 }
