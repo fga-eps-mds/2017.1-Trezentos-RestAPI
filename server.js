@@ -4,9 +4,9 @@ var env = require('./config/env')
 var dbConfig = require('./config/db-config')(env)
 var bodyParser = require('body-parser')
 
-require('./routes')(app, express)
+app.use(bodyParser.json({limit: '5mb'}))
 
-app.use(bodyParser.json({limit: '5mb'}));
+require('./routes')(app, express)
 
 var port = env.port
 

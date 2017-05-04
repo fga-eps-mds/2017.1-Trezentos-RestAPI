@@ -5,16 +5,19 @@ module.exports = {
   register: (request, response) => {
     return new Promise((resolve, reject) => {
       var user = new User({
-        name: request.query.name || request.name,
-        email: request.query.email || request.email,
-        password: request.query.password || request.password,
-        isFromFacebook: request.query.facebook || request.facebook,
-        salt: request.query.salt || request.salt
+        name: request.query.name || request.body.name,
+        email: request.query.email || request.body.email,
+        password: request.query.password || request.body.password,
+        isFromFacebook: request.query.facebook || request.body.facebook,
+        salt: request.query.salt || request.body.salt
       })
       user.save((err, user) => {
         if (!err) {
-          response.status(200).send({code: '200', message: 'user sucessfully registered'})
-          console.log("saved user: ", user)
+          response.status(200).send({
+            code: '200',
+            message: 'user sucessfully registered',
+            user: user
+          })
           resolve(true)
         } else {
           if (err.code === 11000) {
@@ -32,8 +35,7 @@ module.exports = {
 
   authenticate: (request, response) => {
     return new Promise((resolve, reject) => {
-      var email = request.query.email || request.email
-      console.log(request.query, request.body, request.user)
+      var email = request.query.email || request.body.email
       User.findOne({
         email: email,
       }, {__v: 0, _id: 0}, (err, user) => {
@@ -52,33 +54,5 @@ module.exports = {
         }
       })
     })
-  },
-
-  test: (request, response) => {
-    response.send({ test: true, production: true })
-  },
-
-  registerTest: (request, response) => {
-    return new Promise((resolve, reject) => {
-      var user =  new User({
-        name: "test",
-        email: "test@test.com",
-        password: "123456"
-      })
-      user.save((err, user) => {
-        if (!err) {
-          response.status(200).send({code: '200', message: 'user sucessfully registered', user: user, age: user.age })
-          resolve(true)
-        } else {
-          if (err.code === 11000) {
-            reponse.status(200).send({code: err.code, message: 'user already exists'})
-            resolve(err)
-          } else {
-            reject(err)
-          }
-        }
-      })
-    })
-  },
-
+  }
 }
