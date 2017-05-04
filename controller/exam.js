@@ -4,9 +4,9 @@ module.exports = {
   register: (request, response) => {
     return new Promise((resolve, reject) => {
       var exam = new Exam({
-        name: request.query.name || request.name,
-        userClassName: request.query.userClassName || request.userClassName,
-        classOwnerEmail: request.query.classOwnerEmail || request.classOwnerEmail
+        name: request.query.name || request.body.name,
+        userClassName: request.query.userClassName || request.body.userClassName,
+        classOwnerEmail: request.query.classOwnerEmail || request.body.classOwnerEmail
       })
       exam.save((err, exam) => {
         if (!err) {
@@ -29,8 +29,8 @@ module.exports = {
 
   findExamsFromUserClass: (request, response) => {
     return new Promise((resolve, reject) => {
-      var email = request.query.email || request.email
-      var userClassName = request.query.userClassName || request.userClassName
+      var email = request.query.email || request.body.email
+      var userClassName = request.query.userClassName || request.body.userClassName
       console.log(email)
 
       Exam.find({
