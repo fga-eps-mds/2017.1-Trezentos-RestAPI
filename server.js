@@ -14,4 +14,3 @@ app.listen(port, () => {
   console.log('Listening on ' + port)
 })
 
-insecureRouter.get('/class/user/:email', userClass.findClassesFromStudent)

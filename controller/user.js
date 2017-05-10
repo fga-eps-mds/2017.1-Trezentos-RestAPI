@@ -40,18 +40,28 @@ module.exports = {
       User.findOne({
         email: email,
       }, {__v: 0, _id: 0}, (err, user) => {
-        var result = {
-          success: err === null && user !== null,
-          name: user.name,
-          password: user.password,
-          salt: user.salt
-        }
+        var success = err === null && user !== null
+        
+        console.log(success)
+        if (success) {
+          var result = {
+            success: success,
+            name: user.name,
+            password: user.password,
+            salt: user.salt
+          }
 
-        response.status(200).send(result)
-        if (!err) {
+          response.status(200).send(result)
           resolve(result)
-        } else {
+        } else if(err) {
           reject(err)
+        } else {
+          response.status(400).send({
+            success: false,
+            name: null,
+            password: null,
+            salt: null
+          })          
         }
       })
     })
