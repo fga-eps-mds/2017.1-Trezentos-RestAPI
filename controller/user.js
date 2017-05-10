@@ -6,11 +6,11 @@ module.exports = {
     return new Promise((resolve, reject) => {
       console.log(response.query)
       var user = new User({
-        name: request.query.name || request.body.name,
-        email: request.query.email || request.body.email,
-        password: request.query.password || request.body.password,
-        isFromFacebook: request.query.facebook || request.body.facebook,
-        salt: request.query.salt || request.body.salt
+        name: request.query.name,
+        email: request.query.email,
+        password: request.query.password,
+        isFromFacebook: request.query.facebook,
+        salt: request.query.salt
       })
       user.save((err, user) => {
         if (!err) {

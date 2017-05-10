@@ -4,14 +4,14 @@ module.exports = {
   register: (request, response) => {
     return new Promise((resolve, reject) => {
       var userClass = new Class({
-        name: request.query.name || request.body.name,
-        ownerEmail: request.query.ownerEmail || request.body.ownerEmail,
-        institution: request.query.institution || request.body.institution,
-        passingScore: request.query.passingScore || request.body.passingScore,
-        additionScore: request.query.additionScore || request.body.additionScore,
-        password: request.query.password || request.body.password,
-        students: request.query.students || request.body.password,
-        numberOfStudentsPerGroup: request.query.numberOfStudentsPerGroup || request.body.numberOfStudentsPerGroup
+        name: request.query.name,
+        ownerEmail: request.query.ownerEmail,
+        institution: request.query.institution,
+        passingScore: request.query.passingScore,
+        additionScore: request.query.additionScore,
+        password: request.query.password,
+        students: request.query.students,
+        numberOfStudentsPerGroup: request.query.numberOfStudentsPerGroup
       })
       userClass.save((err, user) => {
         if (!err) {
@@ -32,9 +32,24 @@ module.exports = {
     })
   },
 
+  findClasses: (request, response) => {
+    return new Promise((resolve, reject) => {
+      Class.find({} ,{ _id: 0, __v: 0 }, (err, results) => {
+          if(!err) {
+            response.status(200).send(results)
+            resolve(response)
+          } else {
+            console.log(err)
+            reject(err)
+          }
+        })
+    })
+  },
+
+
   findClassesFromUser: (request, response) => {
     return new Promise((resolve, reject) => {
-      var email = request.query.email || request.body.email
+      var email = request.query.email
       console.log(email)
 
       Class.find({ ownerEmail: email },
@@ -56,9 +71,10 @@ module.exports = {
       var userClassJson = request.query.userClass
 
       var userClass = JSON.parse(userClassJson)
-
-      var oldName = request.query.oldName || request.body.oldName
-      var ownerEmail = request.query.email || request.body.email
+      
+      var oldName = request.query.oldName
+      var ownerEmail = request.query.email
+      
       Class.update({ ownerEmail: ownerEmail, name: oldName },
         {$set: userClass}, (err, mongoResponse) => {
         if (!err) {
@@ -66,9 +82,10 @@ module.exports = {
           response.status(200).send({ result: status })
           resolve(status)
         } else {
+          console.log(err)
           reject(err)
         }
       })
     })
-  },
+  }
 }
