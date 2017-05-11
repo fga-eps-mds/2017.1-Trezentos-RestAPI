@@ -1,10 +1,10 @@
 var User = require('../model/schema/user')
+var _ = require('lodash')
 
 module.exports = {
 
   register: (request, response) => {
     return new Promise((resolve, reject) => {
-      console.log(response.query)
       var user = new User({
         name: request.query.name,
         email: request.query.email,
@@ -13,6 +13,7 @@ module.exports = {
         salt: request.query.salt
       })
       user.save((err, user) => {
+        user = _.omit(user.toObject(), ['_id', '__v'])
         if (!err) {
           response.status(200).send({
             code: '200',
