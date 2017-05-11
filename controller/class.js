@@ -84,6 +84,28 @@ module.exports = {
     })
   },
 
+  insertUserInClass: (request, response) => {
+    return new Promise((resolve, reject) => {
+      console.log(request.query)
+
+      var student = request.query.student
+      var name = request.query.name
+      var email = request.query.email
+
+      Class.update({ ownerEmail: email, name: name },
+        {$push: { students: student }}, (err, mongoResponse) => {
+        if (!err) {
+          var status = err == null && mongoResponse.nModified === 1
+          response.status(200).send({ result: status })
+          resolve(status)
+        } else {
+          console.log(err)
+          reject(err)
+        }
+      })
+    })
+  },
+
   update: (request, response) => {
     return new Promise((resolve, reject) => {
       var userClassJson = request.query.userClass
