@@ -1,6 +1,7 @@
 var Class = require('../model/schema/class')
 
 module.exports = {
+
   register: (request, response) => {
     return new Promise((resolve, reject) => {
       var userClass = new Class({
@@ -65,6 +66,7 @@ module.exports = {
         })
     })
   },
+  
   insertUserInClass: (request, response) => {
     return new Promise((resolve, reject) => {
       console.log(request.query)

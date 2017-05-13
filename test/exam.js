@@ -1,5 +1,5 @@
 var expect = require("chai").expect
-var User = require('../model/schema/exam')
+var Exam = require('../model/schema/exam')
 var examController = require('../controller/exam.js')
 var sinon = require('sinon')
 var testHelper = require('./test-helper')
@@ -10,8 +10,7 @@ const response = {
   send: function () {}
 }
 
-describe('Test suite for Exam', () => {
-
+describe('Test suite for Exams', () => {
   testHelper.setupTest()
 
   describe('Exam', () => {
