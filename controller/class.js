@@ -17,7 +17,7 @@ module.exports = {
       userClass.save((err, user) => {
         if (!err) {
           response.status(200).send({code: '200', message: 'class sucessfully registered'})
-          console.log("saved user class: ", user)
+          
           resolve(true)
         } else {
           if (err.code === 11000) {

@@ -1,7 +1,7 @@
 var Exam = require('../model/schema/exam')
 
 module.exports = {
-  
+
   register: (request, response) => {
     return new Promise((resolve, reject) => {
       var exam = new Exam({
@@ -12,7 +12,6 @@ module.exports = {
       exam.save((err, exam) => {
         if (!err) {
           response.status(200).send({code: '200', message: 'exam sucessfully registered'})
-          console.log("saved exam: ", exam)
           resolve(true)
         } else {
           if (err.code === 11000) {
