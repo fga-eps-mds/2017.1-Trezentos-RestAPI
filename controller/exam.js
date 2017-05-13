@@ -1,6 +1,7 @@
 var Exam = require('../model/schema/exam')
 
 module.exports = {
+  
   register: (request, response) => {
     return new Promise((resolve, reject) => {
       var exam = new Exam({
