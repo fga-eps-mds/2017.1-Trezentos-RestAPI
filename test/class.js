@@ -15,12 +15,10 @@ describe('Test suite for Classes', () => {
   testHelper.setupTest()
 
   describe('Class', () => {
-    describe('when registered', () => {
-
       it('should successfully register class', (done) => {
         var query = {
           name: 'test class',
-          email: 'test@test.com',
+          ownerEmail: 'test@test.com',
           institution: 'test institution',
           passingScore: '5',
           additionScore: '1',
@@ -31,7 +29,7 @@ describe('Test suite for Classes', () => {
 
         var savedClass = {
           name: 'test class',
-          email: 'test@test.com',
+          ownerEmail: 'test@test.com',
           institution: 'test institution',
           passingScore: '5',
           additionScore: '1',
@@ -56,11 +54,12 @@ describe('Test suite for Classes', () => {
         .catch((err) => {
           done(err)
         })
+      })
 
-        it('should sucessfully if class already exists', (done) => {
+      it('should sucessfully if class already exists', (done) => {
         var query = {
           name: 'test class',
-          email: 'test@test.com',
+          ownerEmail: 'test@test.com',
           institution: 'test institution',
           passingScore: '5',
           additionScore: '1',
@@ -71,7 +70,7 @@ describe('Test suite for Classes', () => {
 
         var savedClass = {
           name: 'test class',
-          email: 'test@test.com',
+          ownerEmail: 'test@test.com',
           institution: 'test institution',
           passingScore: '5',
           additionScore: '1',
@@ -98,7 +97,5 @@ describe('Test suite for Classes', () => {
         })
       })
 
-      })
-    })
   })
 })
