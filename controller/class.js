@@ -65,25 +65,6 @@ module.exports = {
         })
     })
   },
-
-  findClassesFromStudent: (request, response) => {
-    return new Promise((resolve, reject) => {
-      var email = request.params.email
-
-      Class.find({ students: email },
-        { _id: 0, __v: 0 },
-        (err, classes) => {
-          if(!err) {
-            response.status(200).send(classes)
-            resolve(classes)
-          } else {
-            result.status(500).send([])
-            reject(err)
-          }
-        })
-    })
-  },
-
   insertUserInClass: (request, response) => {
     return new Promise((resolve, reject) => {
       console.log(request.query)

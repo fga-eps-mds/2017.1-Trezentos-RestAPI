@@ -11,7 +11,7 @@ var jwtCheck = jwt({
 module.exports = (app, express) => {
   const secureRouter = express.Router() // secure routes
   const insecureRouter = express.Router() // insecure routers
- 
+
   // secure routes
   //app.use('/api/secure', secureRouter)
   //secureRouter.use('/', jwtCheck)
@@ -27,7 +27,6 @@ module.exports = (app, express) => {
   insecureRouter.post('/class/register', userClass.register)
   insecureRouter.get('/class/find', userClass.findClasses)
   insecureRouter.get('/class/user/find', userClass.findClassesFromUser)
-  insecureRouter.get('/class/user/:email', userClass.findClassesFromStudent)
   insecureRouter.put('/class/user/student', userClass.insertUserInClass)
   insecureRouter.put('/class/user/edit', userClass.update)
 
