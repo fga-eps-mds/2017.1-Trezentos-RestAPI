@@ -13,8 +13,8 @@ module.exports = {
         salt: request.query.salt
       })
       user.save((err, user) => {
-        user = _.omit(user.toObject(), ['_id', '__v'])
         if (!err) {
+          user = _.omit(user.toObject(), ['_id', '__v'])
           response.status(200).send({
             code: '200',
             message: 'user sucessfully registered',
@@ -42,7 +42,7 @@ module.exports = {
         email: email,
       }, {__v: 0, _id: 0}, (err, user) => {
         var success = err === null && user !== null
-        
+
         console.log(success)
         if (success) {
           var result = {
@@ -55,6 +55,12 @@ module.exports = {
           response.status(200).send(result)
           resolve(result)
         } else if(err) {
+          response.status(400).send({
+            success: false,
+            name: null,
+            password: null,
+            salt: null
+          })
           reject(err)
         } else {
           response.status(400).send({
@@ -62,7 +68,8 @@ module.exports = {
             name: null,
             password: null,
             salt: null
-          })          
+          })
+          reject()
         }
       })
     })
