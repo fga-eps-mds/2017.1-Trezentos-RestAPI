@@ -23,11 +23,11 @@ module.exports = {
           resolve(true)
         } else {
           if (err.code === 11000) {
-            console.log('error saving user: duplicated user')
+            // console.log('error saving user: duplicated user')
             response.status(200).send({code: err.code, message: 'user already exists'})
             resolve(err)
           } else {
-            console.log('error saving user: ', err.message)
+            // console.log('error saving user: ', err.message)
             reject(err)
           }
         }
@@ -43,7 +43,7 @@ module.exports = {
       }, {__v: 0, _id: 0}, (err, user) => {
         var success = err === null && user !== null
 
-        console.log(success)
+        // console.log(success)
         if (success) {
           var result = {
             success: success,

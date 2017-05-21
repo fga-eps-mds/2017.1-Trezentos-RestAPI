@@ -17,15 +17,15 @@ module.exports = {
       userClass.save((err, user) => {
         if (!err) {
           response.status(200).send({code: '200', message: 'class sucessfully registered'})
-          
+          // console.log("saved user class: ", user)
           resolve(true)
         } else {
           if (err.code === 11000) {
-            console.log('error saving user class: duplicated class')
+            // console.log('error saving user class: duplicated class')
             response.status(200).send({code: err.code, message: 'class already exists'})
             resolve(err)
           } else {
-            console.log('error saving class: ', err.message)
+            // console.log('error saving class: ', err.message)
             reject(err)
           }
         }
@@ -40,7 +40,7 @@ module.exports = {
             response.status(200).send(results)
             resolve(response)
           } else {
-            console.log(err)
+            // console.log(err)
             reject(err)
           }
         })
@@ -51,7 +51,7 @@ module.exports = {
   findClassesFromUser: (request, response) => {
     return new Promise((resolve, reject) => {
       var email = request.query.email
-      console.log(email)
+      // console.log(email)
 
       Class.find({ ownerEmail: email },
         { _id: 0, __v: 0 },
@@ -60,7 +60,7 @@ module.exports = {
             response.status(200).send(results)
             resolve(response)
           } else {
-            console.log(err)
+            // console.log(err)
             reject(err)
           }
         })
@@ -69,7 +69,7 @@ module.exports = {
   
   insertUserInClass: (request, response) => {
     return new Promise((resolve, reject) => {
-      console.log(request.query)
+      // console.log(request.query)
 
       var student = request.query.student
       var name = request.query.name
@@ -82,7 +82,7 @@ module.exports = {
           response.status(200).send({ result: status })
           resolve(status)
         } else {
-          console.log(err)
+          // console.log(err)
           reject(err)
         }
       })
@@ -105,7 +105,7 @@ module.exports = {
           response.status(200).send({ result: status })
           resolve(status)
         } else {
-          console.log(err)
+          // console.log(err)
           reject(err)
         }
       })

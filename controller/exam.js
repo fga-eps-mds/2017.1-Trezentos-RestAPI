@@ -15,11 +15,11 @@ module.exports = {
           resolve(true)
         } else {
           if (err.code === 11000) {
-            console.log('error saving exam: duplicated exam')
+            // console.log('error saving exam: duplicated exam')
             response.status(200).send({code: err.code, message: 'exam already exists'})
             resolve(err)
           } else {
-            console.log('error saving exam: ', err.message)
+            // console.log('error saving exam: ', err.message)
             reject(err)
           }
         }
@@ -31,7 +31,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       var email = request.query.email || request.body.email
       var userClassName = request.query.userClassName || request.body.userClassName
-      console.log(email)
+      // console.log(email)
 
       Exam.find({
         classOwnerEmail: email,
@@ -42,7 +42,7 @@ module.exports = {
             response.status(200).send(results)
             resolve(response)
           } else {
-            console.log(err)
+            // console.log(err)
             reject(err)
           }
         })
