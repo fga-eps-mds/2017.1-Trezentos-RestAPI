@@ -33,4 +33,7 @@ module.exports = (app, express) => {
   // exam
   insecureRouter.post('/exam/register', exam.register)
   insecureRouter.get('/exam/class/user/find', exam.findExamsFromUserClass)
+
+  //grades
+  insecureRouter.put('/exam/first_grades', exam.saveFirstGrades)
 }
