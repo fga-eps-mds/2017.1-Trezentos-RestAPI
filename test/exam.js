@@ -80,46 +80,46 @@ describe('Test suite for Exams', () => {
         })
       })
 
-      // describe('when found class', () => {
-      //   it('should successfully find exams from user class', (done) => {
-      //     var query = {
-      //       email: 'test@test.com',
-      //       userClassName: 'test'
-      //     }
+      describe('when found class', () => {
+        it('should successfully find exams from user class', (done) => {
+          var query = {
+            email: 'test@test.com',
+            userClassName: 'test'
+          }
           
-      //     var foundExam = [{ 
-      //       name: 'testExam',
-      //       userClassName: 'test',
-      //       classOwnerEmail: 'test@test.com',
-      //       secondGrades: [],
-      //       firstGrades: [] 
-      //     }]
+          var foundExam = [{ 
+            name: 'testExam',
+            userClassName: 'test',
+            classOwnerEmail: 'test@test.com',
+            secondGrades: [],
+            firstGrades: [] 
+          }]
 
-      //     var mock = sinon.mock(response)
-      //     mock.expects('status').once().withExactArgs(200).returns(response)
-      //     mock.expects('send').once().withExactArgs([{ 
-      //       name: 'testExam',
-      //       userClassName: 'test',
-      //       classOwnerEmail: 'test@test.com',
-      //       secondGrades: [],
-      //       firstGrades: []
-      //     }])
+          var mock = sinon.mock(response)
+          mock.expects('status').once().withExactArgs(200).returns(response)
+          // mock.expects('send').once().withExactArgs([{ 
+          //   name: 'testExam',
+          //   userClassName: 'test',
+          //   classOwnerEmail: 'test@test.com',
+          //   secondGrades: [],
+          //   firstGrades: []
+          // }])
 
-      //     examController.findExamsFromUserClass({ query: query }, response)
-      //     .then(() => {
-      //       try {
-      //         mock.verify()
-      //         done()
-      //       } catch (exception) {
-      //         done(exception)
-      //       }
-      //     })
-      //     .catch((err) => {
-      //       done(err)
-      //     })
+          examController.findExamsFromUserClass({ query: query }, response)
+          .then(() => {
+            try {
+              mock.verify()
+              done()
+            } catch (exception) {
+              done(exception)
+            }
+          })
+          .catch((err) => {
+            done(err)
+          })
 
-      //   })
-      // })
+        })
+      })
 
       describe('when saved grades', () => {
         it('should successfully save first grade', (done) => {

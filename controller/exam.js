@@ -67,7 +67,7 @@ module.exports = {
            response.status(200).send({ result: status })
            resolve(status)
          } else {
-           console.log(err)
+          //  console.log(err)
            reject(err)
         }
       })
@@ -92,7 +92,7 @@ module.exports = {
            response.status(200).send({ result: status })
            resolve(status)
          } else {
-           console.log(err)
+          //  console.log(err)
            reject(err)
         }
       })

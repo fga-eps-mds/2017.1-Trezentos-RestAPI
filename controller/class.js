@@ -92,9 +92,7 @@ module.exports = {
   update: (request, response) => {
     return new Promise((resolve, reject) => {
       var userClassJson = request.query.userClass
-
       var userClass = JSON.parse(userClassJson)
-
       var oldName = request.query.oldName
       var ownerEmail = request.query.email
 
