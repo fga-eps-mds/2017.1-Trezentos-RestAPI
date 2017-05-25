@@ -72,5 +72,31 @@ module.exports = {
         }
       })
     })
+  },
+
+  saveSecondGrades: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var email = request.body.email
+      var userClassName = request.body.userClassName
+      var name = request.body.name
+      var secondGrades = request.body.secondGrades
+
+      Exam.update({
+        classOwnerEmail: email,
+        userClassName: userClassName,
+        name: name
+      }, { $push: { secondGrades: secondGrades } },
+      (err, mongoResponse) => {
+         if (!err) {
+           var status = err == null && mongoResponse.nModified === 1
+           response.status(200).send({ result: status })
+           resolve(status)
+         } else {
+           console.log(err)
+           reject(err)
+        }
+      })
+    })
   }
+
 }

@@ -36,4 +36,5 @@ module.exports = (app, express) => {
 
   //grades
   insecureRouter.put('/exam/first_grades', exam.saveFirstGrades)
+  insecureRouter.put('/exam/second_grades', exam.saveSecondGrades)
 }
