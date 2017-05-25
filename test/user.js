@@ -87,7 +87,9 @@ describe('Test suite for Users', () => {
           done(err)
         })
       })
+    })
 
+    describe('when authenticated', () => {
       it('should sucessfully authenticate user', (done) => {
         var query = {
           email: 'test@test.com'

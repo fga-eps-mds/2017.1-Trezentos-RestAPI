@@ -29,8 +29,8 @@ module.exports = {
 
   findExamsFromUserClass: (request, response) => {
     return new Promise((resolve, reject) => {
-      var email = request.query.email || request.body.email
-      var userClassName = request.query.userClassName || request.body.userClassName
+      var email = request.query.email
+      var userClassName = request.query.userClassName
       // console.log(email)
 
       Exam.find({
