@@ -5,8 +5,8 @@ var examSchema = new Schema({
   name: String,
   userClassName: String,
   classOwnerEmail: String,
-  firstGrades: Array,
-  secondGrades: Array
+  firstGrades: String,
+  secondGrades: String
 })
 
 examSchema.index({
@@ -16,4 +16,3 @@ examSchema.index({
 }, {unique: true})
 
 module.exports = mongoose.model('Exam', examSchema)
-
