@@ -22,6 +22,11 @@ module.exports = (app, express) => {
   // user
   insecureRouter.post('/user/register', user.register)
   insecureRouter.post('/user/login', user.authenticate)
+  insecureRouter.get('/user/rate', user.findUserRateInExam)
+  insecureRouter.post('/user/rate', user.saveRates)
+  insecureRouter.get('/user/rateToDo', user.findUserRatesToDo)
+  insecureRouter.post('/user/rateToDo', user.saveRatesToDo)
+  insecureRouter.delete('/user/rateToDo', user.deleteRatesToDo)
 
   // class
   insecureRouter.post('/class/register', userClass.register)
