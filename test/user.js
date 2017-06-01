@@ -23,7 +23,9 @@ describe('Test suite for Users', () => {
           email: 'test@test.com',
           password: '123456',
           facebook: false,
-          salt: '123'
+          salt: '123',
+          rates: [],
+          ratesToDo: []
         }
 
         var savedUser = {
@@ -31,7 +33,9 @@ describe('Test suite for Users', () => {
           email: 'test@test.com',
           password: '123456',
           isFromFacebook: false,
-          salt: '123'
+          salt: '123',
+          rates: [],
+          ratesToDo: []
         }
 
         var mock = sinon.mock(response)
@@ -59,7 +63,9 @@ describe('Test suite for Users', () => {
           email: 'test@test.com',
           password: '123456',
           facebook: false,
-          salt: '123'
+          salt: '123',
+          rates: [],
+          ratesToDo: []
         }
 
         var savedUser = {
@@ -67,7 +73,9 @@ describe('Test suite for Users', () => {
           email: 'test@test.com',
           password: '123456',
           isFromFacebook: false,
-          salt: '123'
+          salt: '123',
+          rates: [],
+          ratesToDo: []
         }
 
         var mock = sinon.mock(response)
@@ -150,5 +158,37 @@ describe('Test suite for Users', () => {
         })
       })
     })
+
+    // describe('when saved rates', () => {
+    //     it('should successfully save rate', (done) => {
+    //       var body = {
+    //         email: 'test@test.com',
+    //         rate: {
+    //           userClassOwnerEmail: 'teacher@email.com',
+    //           userClass: 'class name',
+    //           rate: 5.0
+    //         }
+          
+    //       }
+
+    //       var mock = sinon.mock(response)
+    //       mock.expects('status').once().withExactArgs(200).returns(response)
+    //       mock.expects('send').once().withExactArgs({result: true})
+
+    //       userController.saveRates({ body: body }, response)
+    //       .then(() => {
+    //         try {
+    //           mock.verify()
+    //           done()
+    //         } catch (exception) {
+    //           done(exception)
+    //         }
+    //       })
+    //       .catch((err) => {
+    //         done(err)
+    //       })
+    //     })
+    // })
+  
   })
 })
