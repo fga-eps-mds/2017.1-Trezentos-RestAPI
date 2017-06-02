@@ -73,5 +73,125 @@ module.exports = {
         }
       })
     })
+  }, 
+
+  saveRates: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var email = request.body.email
+      var rate = request.body.rate
+
+      User.update({
+        email: email
+      }, { $push: { rates: rate } },
+      (err, mongoResponse) => {
+        if(!err) {
+          var status = err == null && mongoResponse.nModified === 1
+          response.status(200).send({ result: status })
+          resolve(status)
+        } else {
+          //  console.log(err)
+          reject(err)
+        }
+      })
+    })
+  },
+
+  findUserRateInExam: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var email = request.query.email
+      var userClass = request.query.userClass
+      var exam = request.query.exam
+      var userClassOwnerEmail = request.query.userClassOwnerEmail
+
+      var rateToFind = {
+        userClass: userClass,
+        exam: exam,
+        email: userClassOwnerEmail
+      }
+      User.find({
+        email: email,
+      }, { _id: 0, __v: 0 },
+        (err, results) => {
+          var user = results[0]
+          if(!err) {
+            response.status(200).send(user.rates.filter((rate) => {
+              return rate.userClass === rateToFind.userClass &&
+                rate.exam === rateToFind.exam &&
+                rate.email === rateToFind.email
+            }))
+            resolve(response)
+          } else {
+            // console.log(err)
+            reject(err)
+          }
+        })
+    })
+  },
+
+  saveRatesToDo: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var email = request.body.email
+      var rate = request.body.rateToDo
+
+      User.update({
+        email: email
+      }, { $push: { ratesToDo: rate } },
+      (err, mongoResponse) => {
+        if(!err) {
+          var status = err == null && mongoResponse.nModified === 1
+          response.status(200).send({ result: status })
+          resolve(status)
+        } else {
+          //  console.log(err)
+          reject(err)
+        }
+      })
+    })
+  },
+
+  findUserRatesToDo: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var email = request.query.email
+
+      User.find({
+        email: email,
+      }, { _id: 0, __v: 0 },
+        (err, results) => {
+          var user = results[0]
+          if(!err) {
+            response.status(200).send(user.ratesToDo)
+            resolve(response)
+          } else {
+            // console.log(err)
+            reject(err)
+          }
+        })
+    })
+  },
+
+  deleteRatesToDo: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var email = request.query.email
+      var rate = {
+        userClass: request.query.userClass,
+        exam: request.query.exam,
+        email: request.query.userClassOwnerEmail
+      }
+
+      User.update({
+        email: email,
+      }, { $pull: { ratesToDo: rate } },
+        (err, mongoResponse) => {
+          if(!err) {
+            var status = err == null && mongoResponse.nModified === 1
+            response.status(200).send({ result: status })
+            resolve(response)
+          } else {
+            // console.log(err)
+            reject(err)
+          }
+        })
+    })
   }
+
 }
