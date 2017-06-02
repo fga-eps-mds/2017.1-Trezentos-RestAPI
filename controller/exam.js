@@ -56,6 +56,8 @@ module.exports = {
       var name = request.body.name
       var firstGrades = request.body.firstGrades
 
+      console.log(email, userClassName, name, firstGrades)
+
       Exam.update({
         classOwnerEmail: email,
         userClassName: userClassName,
@@ -97,6 +99,29 @@ module.exports = {
         }
       })
     })
-  }
+  },
 
+  findFirstGradeFromExam: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var classOwnerEmail = request.query.classOwnerEmail
+      var userClassName = request.query.userClassName
+      var name = request.query.name
+      // console.log(email)
+
+      Exam.find({
+        classOwnerEmail: classOwnerEmail,
+        userClassName: userClassName,
+        name: name
+      }, { _id: 0, __v: 0 },
+        (err, results) => {
+          if(!err) {
+            response.status(200).send(results[0].firstGrades)
+            resolve(response)
+          } else {
+            // console.log(err)
+            reject(err)
+          }
+        })
+    })
+  },
 }
