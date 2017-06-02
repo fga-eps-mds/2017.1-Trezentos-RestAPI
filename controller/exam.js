@@ -62,7 +62,7 @@ module.exports = {
         classOwnerEmail: email,
         userClassName: userClassName,
         name: name
-      }, { $push: { firstGrades: firstGrades } },
+      }, { $set: { firstGrades: firstGrades } },
       (err, mongoResponse) => {
          if (!err) {
            var status = err == null && mongoResponse.nModified === 1
@@ -87,7 +87,7 @@ module.exports = {
         classOwnerEmail: email,
         userClassName: userClassName,
         name: name
-      }, { $push: { secondGrades: secondGrades } },
+      }, { $set: { secondGrades: secondGrades } },
       (err, mongoResponse) => {
          if (!err) {
            var status = err == null && mongoResponse.nModified === 1
@@ -124,4 +124,53 @@ module.exports = {
         })
     })
   },
+
+  saveGroups: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var email = request.body.email
+      var userClassName = request.body.userClassName
+      var name = request.body.name
+      var groups = request.body.groups
+
+      Exam.update({
+        classOwnerEmail: email,
+        userClassName: userClassName,
+        name: name
+      }, { $set: { groups: groups } },
+      (err, mongoResponse) => {
+         if (!err) {
+           var status = err == null && mongoResponse.nModified === 1
+           response.status(200).send({ result: status })
+           resolve(status)
+         } else {
+          //  console.log(err)
+           reject(err)
+        }
+      })
+    })
+  },
+
+  findGroups: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var classOwnerEmail = request.query.classOwnerEmail
+      var userClassName = request.query.userClassName
+      var name = request.query.name
+      // console.log(email)
+
+      Exam.find({
+        classOwnerEmail: classOwnerEmail,
+        userClassName: userClassName,
+        name: name
+      }, { _id: 0, __v: 0 },
+        (err, results) => {
+          if(!err) {
+            response.status(200).send(results[0].groups)
+            resolve(response)
+          } else {
+            // console.log(err)
+            reject(err)
+          }
+        })
+    })
+  }
 }

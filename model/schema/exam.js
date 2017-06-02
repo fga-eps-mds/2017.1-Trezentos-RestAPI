@@ -6,7 +6,8 @@ var examSchema = new Schema({
   userClassName: String,
   classOwnerEmail: String,
   firstGrades: String,
-  secondGrades: String
+  secondGrades: String,
+  groups: String
 })
 
 examSchema.index({
