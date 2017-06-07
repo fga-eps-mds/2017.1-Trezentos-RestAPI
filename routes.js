@@ -40,7 +40,7 @@ module.exports = (app, express) => {
   insecureRouter.get('/exam/class/user/find', exam.findExamsFromUserClass)
   insecureRouter.get('/exam/first_grades', exam.findFirstGradeFromExam)
   insecureRouter.get('/exam/groups', exam.findGroups)
-  insecureRouter.post('/exam/groups', exam.saveGroups)
+  insecureRouter.put('/exam/groups', exam.saveGroups)
 
   //grades
   insecureRouter.put('/exam/first_grades', exam.saveFirstGrades)
