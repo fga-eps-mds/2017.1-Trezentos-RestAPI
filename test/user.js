@@ -39,7 +39,7 @@ describe('Test suite for Users', () => {
 
         var mock = sinon.mock(response)
         mock.expects('status').once().withExactArgs(200).returns(response)
-        mock.expects('send').once().withExactArgs({ code: '200', message: 'user sucessfully registered', user: savedUser })
+        mock.expects('send').once().withExactArgs({ code: '200', message: 'user successfully registered', user: savedUser })
 
         userController.register({ query: query }, response)
         .then(() => {
