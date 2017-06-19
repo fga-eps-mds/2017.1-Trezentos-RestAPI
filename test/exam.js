@@ -16,7 +16,7 @@ describe('Test suite for Exams', () => {
 
   describe('Exam', () => {
       describe('when registered', () => {
-        it('should successfully register exam', (done) => {
+        it('should successfully register exam (query)', (done) => {
           var query = {
             name: 'testExam',
             userClassName: 'test',
@@ -80,6 +80,72 @@ describe('Test suite for Exams', () => {
         })
       })
 
+      describe('when found grades', () => {
+        it('should successfully find first grade from exam', (done) => {
+          var query = {
+            classOwnerEmail: 'test@test.com',
+            userClassName: 'test',
+            name: 'testExam'
+          }
+          
+          var foundGrades = [{
+            classOwnerEmail: 'test@test.com',
+            userClassName: 'test',
+            name: 'testExam'
+          }]
+
+          var mock = sinon.mock(response)
+          mock.expects('status').once().withExactArgs(200).returns(response)
+
+          examController.findFirstGradeFromExam({ query: query }, response)
+          .then(() => {
+            try {
+              mock.verify()
+              done()
+            } catch (exception) {
+              done(exception)
+            }
+          })
+          .catch((err) => {
+            done(err)
+          })
+
+        })
+      })
+
+      describe('when found groups', () => {
+        it('should successfully find find groups in exam', (done) => {
+          var query = {
+            classOwnerEmail: 'test@test.com',
+            userClassName: 'test',
+            name: 'testExam'
+          }
+          
+          var foundGroups = [{
+            classOwnerEmail: 'test@test.com',
+            userClassName: 'test',
+            name: 'testExam'
+          }]
+
+          var mock = sinon.mock(response)
+          mock.expects('status').once().withExactArgs(200).returns(response)
+
+          examController.findGroups({ query: query }, response)
+          .then(() => {
+            try {
+              mock.verify()
+              done()
+            } catch (exception) {
+              done(exception)
+            }
+          })
+          .catch((err) => {
+            done(err)
+          })
+
+        })
+      })
+
       describe('when found class', () => {
         it('should successfully find exams from user class', (done) => {
           var query = {
@@ -97,13 +163,6 @@ describe('Test suite for Exams', () => {
 
           var mock = sinon.mock(response)
           mock.expects('status').once().withExactArgs(200).returns(response)
-          // mock.expects('send').once().withExactArgs([{ 
-          //   name: 'testExam',
-          //   userClassName: 'test',
-          //   classOwnerEmail: 'test@test.com',
-          //   secondGrades: [],
-          //   firstGrades: []
-          // }])
 
           examController.findExamsFromUserClass({ query: query }, response)
           .then(() => {
@@ -179,6 +238,35 @@ describe('Test suite for Exams', () => {
           mock.expects('send').once().withExactArgs({result: true})
 
           examController.saveSecondGrades({ body: body }, response)
+          .then(() => {
+            try {
+              mock.verify()
+              done()
+            } catch (exception) {
+              done(exception)
+            }
+          })
+          .catch((err) => {
+            done(err)
+          })
+        })
+
+      })
+
+      describe('when saved groups', () => {
+        it('should successfully save groups', (done) => {
+          var body = {
+            email: 'test@test.com', 
+            userClassName: 'test',
+            name: 'testExam',
+            groups: ''
+          }
+
+          var mock = sinon.mock(response)
+          mock.expects('status').once().withExactArgs(200).returns(response)
+          mock.expects('send').once().withExactArgs({result: true})
+
+          examController.saveGroups({ body: body }, response)
           .then(() => {
             try {
               mock.verify()

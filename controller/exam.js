@@ -56,7 +56,7 @@ module.exports = {
       var name = request.body.name
       var firstGrades = request.body.firstGrades
 
-      console.log(email, userClassName, name, firstGrades)
+      //console.log(email, userClassName, name, firstGrades)
 
       Exam.update({
         classOwnerEmail: email,
