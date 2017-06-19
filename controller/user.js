@@ -17,7 +17,7 @@ module.exports = {
           user = _.omit(user.toObject(), ['_id', '__v'])
           response.status(200).send({
             code: '200',
-            message: 'user sucessfully registered',
+            message: 'user successfully registered',
             user: user
           })
           resolve(true)
@@ -96,38 +96,6 @@ module.exports = {
     })
   },
 
-  findUserRateInExam: (request, response) => {
-    return new Promise((resolve, reject) => {
-      var email = request.query.email
-      var userClass = request.query.userClass
-      var exam = request.query.exam
-      var userClassOwnerEmail = request.query.userClassOwnerEmail
-
-      var rateToFind = {
-        userClass: userClass,
-        exam: exam,
-        email: userClassOwnerEmail
-      }
-      User.find({
-        email: email,
-      }, { _id: 0, __v: 0 },
-        (err, results) => {
-          var user = results[0]
-          if(!err) {
-            response.status(200).send(user.rates.filter((rate) => {
-              return rate.userClass === rateToFind.userClass &&
-                rate.exam === rateToFind.exam &&
-                rate.email === rateToFind.email
-            }))
-            resolve(response)
-          } else {
-            // console.log(err)
-            reject(err)
-          }
-        })
-    })
-  },
-
   saveRatesToDo: (request, response) => {
     return new Promise((resolve, reject) => {
       var email = request.body.email
@@ -146,6 +114,39 @@ module.exports = {
           reject(err)
         }
       })
+    })
+  },
+
+  findUserRateInExam: (request, response) => {
+    return new Promise((resolve, reject) => {
+      var email = request.query.email
+      var userClass = request.query.userClass
+      var exam = request.query.exam
+      var userClassOwnerEmail = request.query.userClassOwnerEmail
+
+      var rateToFind = {
+        userClass: userClass,
+        exam: exam,
+        email: userClassOwnerEmail
+      }
+      
+      User.find({
+        email: email,
+      }, { _id: 0, __v: 0 },
+        (err, results) => {
+          var user = results[0]
+          if(!err) {
+            response.status(200).send(user.rates.filter((rate) => {
+              return rate.userClass === rateToFind.userClass &&
+                rate.exam === rateToFind.exam &&
+                rate.email === rateToFind.email
+            }))
+            resolve(response)
+          } else {
+            // console.log(err)
+            reject(err)
+          }
+        })
     })
   },
 

@@ -16,7 +16,6 @@ describe('Test suite for Users', () => {
 
   describe('User', () => {
     describe('when registered', () => {
-
       it('should successfully register user', (done) => {
         var query = {
           name: 'test',
@@ -46,6 +45,7 @@ describe('Test suite for Users', () => {
         .then(() => {
           try {
             mock.verify()
+            mock.restore()
             done()
           } catch (exception) {
             done(exception)
@@ -54,8 +54,7 @@ describe('Test suite for Users', () => {
         .catch((err) => {
           done(err)
         })
-
-      })
+      }),
 
       it('should sucessfully if user already exists', (done) => {
         var query = {
@@ -86,6 +85,7 @@ describe('Test suite for Users', () => {
         .then(() => {
           try {
             mock.verify()
+            mock.restore()
             done()
           } catch (exception) {
             done(exception)
@@ -95,6 +95,155 @@ describe('Test suite for Users', () => {
           done(err)
         })
       })
+
+    })
+
+    describe('when found rates', () => {
+        it('should successfully find rate in exam', (done) => {
+          var query = {
+            email: 'test@test.com',
+            userClass: 'class name',
+            exam: 'testExam',
+            userClassOwnerEmail: 'teacher@email.com'
+          }
+          
+          var foundRate = [{ 
+            userClass: 'class name',
+            exam: 'testExam',
+            email: 'test@test.com'
+          }]
+
+          var mock = sinon.mock(response)
+          mock.expects('status').once().withExactArgs(200).returns(response)
+
+          userController.findUserRateInExam({ query: query }, response)
+          .then(() => {
+            try {
+              mock.verify()
+              done()
+            } catch (exception) {
+              done(exception)
+            }
+          })
+          .catch((err) => {
+            done(err)
+          })
+        }),
+
+        it('should successfully find rates to do', (done) => {
+            var query = {
+              email: 'test@test.com'
+            }
+            
+            var foundRate = [{ 
+              email: 'test@test.com'
+            }]
+
+            var mock = sinon.mock(response)
+            mock.expects('status').once().withExactArgs(200).returns(response)
+
+            userController.findUserRatesToDo({ query: query }, response)
+            .then(() => {
+              try {
+                mock.verify()
+                done()
+              } catch (exception) {
+                done(exception)
+              }
+            })
+            .catch((err) => {
+              done(err)
+            })
+        }),
+
+        it('should successfully delete rates to do', (done) => {
+            var query = {
+              email: 'test@test.com',
+              rate: {
+                userClass: 'class name',
+                exam: 'testExam',
+                userClassOwnerEmail: 'teacher@email.com'
+              }
+            }
+
+            var mock = sinon.mock(response)
+            mock.expects('status').once().withExactArgs(200).returns(response)
+
+            userController.deleteRatesToDo({ query: query }, response)
+            .then(() => {
+              try {
+                mock.verify()
+                done()
+              } catch (exception) {
+                done(exception)
+              }
+            })
+            .catch((err) => {
+              done(err)
+            })
+        })
+    })
+
+    describe('when saved rates', () => {
+        it('should successfully save rate', (done) => {
+          var body = {
+            email: 'test@test.com',
+            rate: {
+              userClassOwnerEmail: 'teacher@email.com',
+              userClass: 'class name',
+              rate: 5
+            }
+          }
+          
+          var mock = sinon.mock(response)
+          mock.expects('status').once().withExactArgs(200).returns(response)
+          mock.expects('send').once().withExactArgs({result: true})
+          
+          userController.saveRates({ body: body }, response)
+          .then(() => {
+            try {
+              mock.verify()
+              mock.restore()
+              done()
+            } catch (exception) {
+              done(exception)
+            }
+          })
+          .catch((err) => {
+             done(err)
+          })
+
+        }),
+
+        it('should successfully save rates to do', (done) => {
+          var body = {
+            email: 'test@test.com',
+            rate: {
+              userClassOwnerEmail: 'teacher@email.com',
+              userClass: 'class name',
+              rate: 5
+            }
+          }
+          
+          var mock = sinon.mock(response)
+          mock.expects('status').once().withExactArgs(200).returns(response)
+          mock.expects('send').once().withExactArgs({result: true})
+          
+          userController.saveRatesToDo({ body: body }, response)
+          .then(() => {
+            try {
+              mock.verify()
+              mock.restore()
+              done()
+            } catch (exception) {
+              done(exception)
+            }
+          })
+          .catch((err) => {
+            done(err)
+            })
+
+        })
     })
 
     describe('when authenticated', () => {
@@ -118,6 +267,7 @@ describe('Test suite for Users', () => {
         .then(() => {
           try {
             mock.verify()
+            mock.restore()
             done()
           } catch (exception) {
             done(exception)
@@ -148,47 +298,17 @@ describe('Test suite for Users', () => {
         .then(() => {
           try {
             mock.verify()
+            mock.restore()
             done()
           } catch (exception) {
             done(exception)
           }
         })
         .catch((err) => {
-          done(err)
+            done(err)
+          })
         })
+
       })
-    })
-
-    // describe('when saved rates', () => {
-    //     it('should successfully save rate', (done) => {
-    //       var body = {
-    //         email: 'test@test.com',
-    //         rate: {
-    //           userClassOwnerEmail: 'teacher@email.com',
-    //           userClass: 'class name',
-    //           rate: 5.0
-    //         }
-          
-    //       }
-
-    //       var mock = sinon.mock(response)
-    //       mock.expects('status').once().withExactArgs(200).returns(response)
-    //       mock.expects('send').once().withExactArgs({result: true})
-
-    //       userController.saveRates({ body: body }, response)
-    //       .then(() => {
-    //         try {
-    //           mock.verify()
-    //           done()
-    //         } catch (exception) {
-    //           done(exception)
-    //         }
-    //       })
-    //       .catch((err) => {
-    //         done(err)
-    //       })
-    //     })
-    // })
-  
   })
 })
