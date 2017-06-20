@@ -1,4 +1,5 @@
 var expect = require("chai").expect
+var assert = require('chai').assert
 var User = require('../model/schema/user')
 var userController = require('../controller/user.js')
 var sinon = require('sinon')
@@ -8,6 +9,13 @@ const response = {
   status: function () {},
   end: function () {},
   send: function () {}
+}
+
+function isError(e) {
+    if (typeof e === 'string') {
+        return Promise.reject(new Error(e));
+    }
+    return Promise.resolve(e);
 }
 
 describe('Test suite for Users', () => {
@@ -311,4 +319,92 @@ describe('Test suite for Users', () => {
 
       })
   })
+
+  describe('when error occur', () => {
+    it('when save user', (done) => {
+      userController.register({ query: {} }, response)
+      .then(() => {
+        done('should reject')
+      })
+      .catch(isError)
+      .then((err) => {
+        assert.isDefined(err);
+        done()
+      })
+    }),
+
+    it('when authenticate', (done) => {
+      userController.authenticate({ query: {} }, response)
+      .then(() => {
+        done('should reject')
+      })
+      .catch(isError)
+      .then((err) => {
+        assert.isDefined(err);
+        done()
+      })
+    }), 
+
+    it('when save rates', (done) => {
+      userController.saveRates({ query: {} }, response)
+      .then(() => {
+        done('should reject')
+      })
+      .catch(isError)
+      .then((err) => {
+        assert.isDefined(err);
+        done()
+      })
+    }),
+
+    it('when save rates to do', (done) => {
+      userController.saveRatesToDo({ query: {} }, response)
+      .then(() => {
+        done('should reject')
+      })
+      .catch(isError)
+      .then((err) => {
+        assert.isDefined(err);
+        done()
+      })
+    }),
+
+    it('when rates in exam', (done) => {
+      userController.findUserRateInExam({ body: {} }, response)
+      .then(() => {
+        done('should reject')
+      })
+      .catch(isError)
+      .then((err) => {
+        assert.isDefined(err);
+        done()
+      })
+    }),
+
+    it('when find rates to do', (done) => {
+      userController.findUserRatesToDo({ body: {} }, response)
+      .then(() => {
+        done('should reject')
+      })
+      .catch(isError)
+      .then((err) => {
+        assert.isDefined(err);
+        done()
+      })
+    }),
+
+    it('when delete rates to do', (done) => {
+      userController.deleteRatesToDo({ body: {} }, response)
+      .then(() => {
+        done('should reject')
+      })
+      .catch(isError)
+      .then((err) => {
+        assert.isDefined(err);
+        done()
+      })
+    })
+
+  })
+
 })
