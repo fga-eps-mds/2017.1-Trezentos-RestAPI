@@ -14,11 +14,11 @@
 
 <h1 align="center"> Metodologia Trezentos</h1>
 
-<p align="justify">&emsp;&emsp; Repositório oficial da Rest API referente ao aplicativo Trezentos construído com ```Node.js``` e ```MongoDB```</p>
+&emsp;&emsp; Repositório oficial da Rest API referente ao aplicativo Trezentos construído com ```Node.js``` e ```MongoDB```
 
 ### Instalação do Node.js
 
-<p align="justify">&emsp;&emsp; Visite o [site do Nodejs](https://nodejs.org/en/) e faça o download da versão atual de acordo com a sua plataforma, seguindo as instruções do instalador. </p>
+&emsp;&emsp; Visite o [site do Nodejs](https://nodejs.org/en/) e faça o download da versão atual de acordo com a sua plataforma, seguindo as instruções do instalador.
 
 ### Instalação da API e Guia de Contribuição
 
