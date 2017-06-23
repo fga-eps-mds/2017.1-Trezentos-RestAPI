@@ -1,5 +1,3 @@
-# 2017.1-Trezentos-RestAPI
-
 <p align="center"><a href="http://metodo300.com/" target="_blank"><img width="300"src="https://cloud.githubusercontent.com/assets/8144779/24085533/e6950df4-0cdc-11e7-8770-1b8021d90f01.png"></a></p>
 
 <p align="center">
@@ -12,7 +10,7 @@
 </p>
 
 
-<h1 align="center"> Metodologia Trezentos</h1>
+<h1 align="center"> Metodologia Trezentos - Rest API</h1>
 
 &emsp;&emsp; Repositório oficial da Rest API referente ao aplicativo Trezentos construído com ```Node.js``` e ```MongoDB```
 
